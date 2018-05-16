@@ -57,9 +57,9 @@ function [E, M, x, PRNGState, X] = SwendsenWangIsing( N, T, J, nIter, displayIte
 %           matrices in MATLAB: Design and implementation." SIAM Journal on
 %           Matrix Analysis and Applications 13, no. 1 (1992): 333-356.
 %
-%   
 %
-%   Copyright (c) 2018 Jacob Zavatone-Veth, MIT License 
+%
+%   Copyright (c) 2018 Jacob Zavatone-Veth, MIT License
 
 
 %% Validate inputs
@@ -201,6 +201,11 @@ end
 % Ensure that all interactions are non-negative
 if any(J(:) < 0)
     error('SwendsenWangIsing:Interaction strengths must be non-negative.');
+end
+
+% Ensure that some interactions are nonzero
+if ~any(J(:))
+    error('SwendsenWangIsing:Some interaction strengths must be nonzero.')
 end
 
 % Ensure that the interaction matrix is symmetric
