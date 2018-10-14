@@ -3,7 +3,7 @@
 % model on a two-dimensional grid with period boundary conditions and
 % nearest-neighbor interactions.
 %
-%   Copyright (c) 2018 Jacob Zavatone-Veth, MIT License 
+%   Copyright (c) 2018 Jacob Zavatone-Veth, MIT License
 
 %% Set parameters
 
@@ -39,16 +39,17 @@ acorr = zeros(floor(N/2+1), length(T));
 % Start a timer
 timeAll = tic;
 
-% Iterate in parallel
+% Iterate over temperatures
 for ind = 1:length(T)
-    fprintf('Working on temperature %f.\n', T(ind));
-    
+    % Print a status update to the console
+    fprintf('Working on temperature %d of %d: %f.\n', ind, length(T), T(ind));
+
     % Run the simulation
     [E_iter(:,ind), M_iter(:,ind), x] = SwendsenWangIsing( N^2, T(ind), J, nIter, displayIter );
-    
+
     % Reshape the spin state for output
     spin(:,:,ind) = reshape(x, N, N);
-    
+
     % Compute autocorrelation
     [ acorr(:,ind) ] = Compute2dPeriodicIsingAutocorrelation( spin(:,:,ind), N );
 end

@@ -54,9 +54,10 @@ startState = ticBytes(poolObj);
 % Start a timer
 timeAll = tic;
 
-% Iterate in parallel
+% Iterate over temperatures in parallel
 parfor ind = 1:length(T)
-    fprintf('Working on temperature %f.\n', T(ind));
+    % Print a status update to the console
+    fprintf('Working on temperature %d of %d: %f.\n', ind, length(T), T(ind));
 
     % Run the simulation
     [E_iter(:,ind), M_iter(:,ind), x] = SwendsenWangIsing( N^2, T(ind), J, nIter, displayIter );
