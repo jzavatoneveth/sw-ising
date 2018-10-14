@@ -32,11 +32,11 @@ The `RunSW` and `RunSWParallel` scripts demonstrate the usage of `SwendsenWangIs
 
 ## References
 
-1. Swendsen, Robert H., and Jian-Sheng Wang. "Nonuniversal critical dynamics in Monte Carlo simulations." Physical Review Letters 58, no. 2 (1987): 86. [(Link)](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.58.86)
+1. Swendsen, Robert H., and Jian-Sheng Wang. "Nonuniversal critical dynamics in Monte Carlo simulations." _Physical Review Letters_ 58, no. 2 (1987): 86. [(Link)](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.58.86)
 
-2. Wang, Jian-Sheng, and Robert H. Swendsen. "Cluster Monte Carlo algorithms." Physica A: Statistical Mechanics and its Applications 167, no. 3 (1990): 565-579. [(Link)](https://www.sciencedirect.com/science/article/pii/037843719090275W)
+2. Wang, Jian-Sheng, and Robert H. Swendsen. "Cluster Monte Carlo algorithms." _Physica A: Statistical Mechanics and its Applications_ 167, no. 3 (1990): 565-579. [(Link)](https://www.sciencedirect.com/science/article/pii/037843719090275W)
 
-3. Gilbert, John R., Cleve Moler, and Robert Schreiber. "Sparse matrices in MATLAB: Design and implementation." SIAM Journal on Matrix Analysis and Applications 13, no. 1 (1992): 333-356. [(Link)](https://www.mathworks.com/help/pdf_doc/otherdocs/simax.pdf)
+3. Gilbert, John R., Cleve Moler, and Robert Schreiber. "Sparse matrices in MATLAB: Design and implementation." _SIAM Journal on Matrix Analysis and Applications_ 13, no. 1 (1992): 333-356. [(Link)](https://www.mathworks.com/help/pdf_doc/otherdocs/simax.pdf)
 
 
 ## License

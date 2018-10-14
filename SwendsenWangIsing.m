@@ -127,36 +127,36 @@ end
 % Iterate
 tic;
 for iter = 2:nIter
-    
+
     % Find which spins are aligned
     sameSpin = tril(x' .* J .* x, -1) > 0;
-    
+
     % Form the adjacency matrix of the graph
     A = (sprand(prob) < prob) .* sameSpin;
     A = A + speye(N);
-    
+
     % Form the graph
     G = graph(A, 'lower');
-    
+
     % Find connected components in the graph
     C = conncomp(G, 'OutputForm', 'cell');
-    
+
     % Flip each cluster with probability 1/2
     for ind = 1:length(C)
         if rand(1) < 0.5
             x(C{ind}) = -x(C{ind});
         end
     end
-    
+
     % If desired, store the spin state
     if saveSpins
         X(iter,:) = x;
     end
-    
+
     % Compute the magnetization and energy
     M(iter) = mean(x);
     E(iter) = -(x' * J * x)/N;
-    
+
     % Print an update
     if displayIter > 0 && ~mod(iter, displayIter)
         fprintf('temperature %f, iteration %05d, energy %+f\n', T, iter, E(iter));
