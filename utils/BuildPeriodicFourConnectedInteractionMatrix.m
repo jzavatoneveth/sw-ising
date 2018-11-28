@@ -6,39 +6,32 @@ function [ Jmat ] = BuildPeriodicFourConnectedInteractionMatrix(N)
 %   Copyright (c) 2018 Jacob Zavatone-Veth, MIT License 
 
 tic;
-n = N^2;
-Jmat = zeros(N, N, N, N);
 
-for n1 = 1:N
-    for n2 = 1:N
-        if n1 == 1
-            Jmat(n1, n2, N, n2) = 1;
-            Jmat(n1, n2, n1+1, n2) = 1;
-        elseif n1 == N
-            Jmat(n1, n2, n1-1, n2) = 1;
-            Jmat(n1, n2, 1, n2) = 1;
-        else
-            Jmat(n1, n2, n1-1, n2) = 1;
-            Jmat(n1, n2, n1+1, n2) = 1;
-        end
-        
-        if n2 == 1
-            Jmat(n1, n2, n1, N) = 1;
-            Jmat(n1, n2, n1, n2+1) = 1;
-        elseif n2 == N
-            Jmat(n1, n2, n1, n2-1) = 1;
-            Jmat(n1, n2, n1, 1) = 1;
-        else
-            Jmat(n1, n2, n1, n2-1) = 1;
-            Jmat(n1, n2, n1, n2+1) = 1;
-        end
-        
-    end
-end
-Jmat = reshape(Jmat, n, n);
+% Get the total lattice size
+sz = N^2;
 
-% Make the connectivity matrix sparse for the sake of efficiency
-Jmat = sparse(Jmat);
+% Compute a mesh of indices
+[ri, ci] = meshgrid((1:N)');
+ri = ri(:);
+ci = ci(:);
+
+% Compute the linear indices of each element
+lia = ci + (ri - 1) * N;
+
+% Define a function to handle boundary values
+wf = @(x) x .* (x>0 & x < N+1) + N * double(x==0) + double(x==N+1);
+
+% Compute the linear indices of the four-connected neighbors
+a = wf(ci-1) + (wf(ri) - 1) * N;
+b = wf(ci+1) + (wf(ri) - 1) * N;
+c = ci + (wf(ri-1) - 1) * N;
+d = ci + (wf(ri+1) - 1) * N;
+
+% Form the sparse adjacency matrix
+ii = [a;b;c;d];
+jj = repmat(lia, 4, 1);
+v = ones(length(jj), 1);
+Jmat = sparse(ii, jj, v, sz, sz);
 
 fprintf('Built four-connected interaction matrix in %f seconds.\n', toc);
 
