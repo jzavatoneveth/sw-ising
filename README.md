@@ -28,7 +28,7 @@ Once the simulation is complete, `SwendsenWangIsing` returns up to five output a
 4. `PRNGState`: The initial state of the MATLAB pseudo-random number generator, including the seed.
 5. `X`: An `nIter` by `N` matrix containing the spin states at every iteration. If only four output arguments are requested, only the current spin state is stored, increasing the speed and memory efficiency of the simulation.
 
-The `RunSW` and `RunSWParallel` scripts demonstrate the usage of `SwendsenWangIsing`, including examples of how to construct the inputs and plot the outputs.
+The `RunSW` and `RunSWParallel` scripts demonstrate the usage of `SwendsenWangIsing` to simulate the Ising model on a square lattice, including examples of how to construct the inputs and plot the outputs.
 
 ## References
 
