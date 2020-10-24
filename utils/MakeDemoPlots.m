@@ -3,21 +3,18 @@
 %
 %   Copyright (c) 2018 Jacob Zavatone-Veth, MIT License
 
-%% Evaluate the theoretical energies and magnetizations at each temperature
+%% Evaluate the theoretical energies and magnetizations for the infinite lattice at each temperature
 % (see http://www.scholarpedia.org/article/Ising_model:_exact_results)
 
-% Compute the exact value of the critical temperature for the infinite
-% lattice
+% Compute the exact critical temperature
 Tc = 2 / log(1 + sqrt(2));
 
-% Define an anonymous function to compute the exact energy for the infinite
-% lattice
+% Define an anonymous function to compute the exact energy
 kappa = @(T) 2 * sinh( 2 ./ T ) ./ (cosh( 2 ./ T ).^2);
 K = @(T) integral( @(phi) 1./ sqrt( 1 - (kappa(T).^2) .* (sin(phi).^2) ), 0, pi/2 , 'ArrayValued', true);
 E_theoretical = @(T) -2 * tanh(2./T) - ((sinh(2./T).^2 - 1) ./ (sinh(2./T).*cosh(2./T))) .* ( (2/pi) * K(T) - 1);
 
-% Define an anonymous function to compute the exact magnetization for the infinite
-% lattice
+% Define an anonymous function to compute the exact magnetization
 M_theoretical = @(T) ((1 - (sinh(2./T)).^(-4)).^(1/8)) .* ((T - Tc) < 0);
 
 %% Compute statistics of simulations
@@ -84,7 +81,7 @@ inset.YAxis.Label.FontSize = 20;
 xlim([min(x) max(x)]);
 set(inset, 'box','off');
 
-% Plot the measured and theoretical mangeitzations as a function of temperature
+% Plot the measured and theoretical magnetizations as a function of temperature
 f = figure('Position',[200,500,1000,1000],'WindowStyle','docked');
 plot(T, M, 'linewidth', 2, 'Color', colorOrder(1,:));
 hold on;
